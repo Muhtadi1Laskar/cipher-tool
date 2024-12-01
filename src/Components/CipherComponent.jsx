@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { cipherOptions } from "../Utils/selectOptions";
 import { postCall } from "../API/postCall";
