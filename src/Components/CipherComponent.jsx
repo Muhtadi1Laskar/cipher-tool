@@ -33,7 +33,7 @@ function CipherComponent() {
     };
 
     return (
-        <div className="p-3">
+        <div className="container my-5">
             <h2 className="text-primary">Encryption/Decryption</h2>
             <form onSubmit={handleSubmit}>
                 <FormGroups

@@ -1,12 +1,12 @@
 import { BrowserRouter as Routes } from 'react-router-dom';
-import NavBar from './Components/Navbar';
+import CipherToolsNavbar from './Components/Navbar';
 import './App.css';
 
 function App() {
 
   return (
     <>
-       <NavBar />
+       <CipherToolsNavbar />
       <Routes>
         {/* Add your routes here */}
       </Routes>
