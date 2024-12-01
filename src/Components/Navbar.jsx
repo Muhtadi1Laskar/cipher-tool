@@ -1,36 +1,87 @@
-// import { Link } from 'react-router-dom';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-import HashComponent from './HashComponent';
-import CipherComponent from './CipherComponent';
-import VerifyHashComponent from './VerifyHashComponent';
-import EncodingComponent from './EncodingComponent';
+import { useState } from "react";
+import { Navbar, Nav, Container, Button, Collapse } from "react-bootstrap";
+import HashComponent from "./HashComponent";
+import CipherComponent from "./CipherComponent";
+import VerifyHashComponent from "./VerifyHashComponent";
+import EncodingComponent from "./EncodingComponent";
+import "../App.css";
 
-function Navbar() {
+function CipherToolsNavbar() {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [activeTab, setActiveTab] = useState("hashing");
+
+    const toggleNavbar = () => setIsExpanded(!isExpanded);
+
+    const renderActiveTab = () => {
+        switch (activeTab) {
+            case "hashing":
+                return <HashComponent />;
+            case "encryption":
+                return <CipherComponent />;
+            case "verify-hash":
+                return <VerifyHashComponent />;
+            case "encoding":
+                return <EncodingComponent />;
+            default:
+                return null;
+        }
+    };
+
     return (
-        <Tabs
-            defaultActiveKey="hashing"
-            id="cipher-tools-tabs"
-            className="mb-3"
-            fill
-        >
-            <Tab eventKey="hashing" title="Hashing">
-                <HashComponent />
-            </Tab>
-            
-            <Tab eventKey="encryption" title="Encryption/Decryption">
-                <CipherComponent />
-            </Tab>
+        <div className="container-fluid">
+            {/* Navbar */}
+            <Navbar bg="blue" variant="dark" expand="lg" className="navbar navbar-expand-lg navbar-dark bg-primary" id="nav-bar">
+                <Container>
+                    <Navbar.Brand href="#">Cipher Tools</Navbar.Brand>
+                    <Button
+                        className="navbar-toggler"
+                        aria-controls="responsive-navbar-nav"
+                        aria-expanded={isExpanded}
+                        onClick={toggleNavbar}
+                    >
+                        ☰
+                    </Button>
+                    <Collapse in={isExpanded} className="navbar-collapse">
+                        <Nav className="me-auto" >
+                            <Nav.Link
+                                href="#"
+                                onClick={() => setActiveTab("hashing")}
+                                className={activeTab === "hashing" ? "active" : ""}
+                            >
+                                Hashing
+                            </Nav.Link>
+                            <Nav.Link
+                                href="#"
+                                onClick={() => setActiveTab("encryption")}
+                                className={activeTab === "encryption" ? "active" : ""}
+                            >
+                                Cipher
+                            </Nav.Link>
+                            <Nav.Link
+                                href="#"
+                                onClick={() => setActiveTab("verify-hash")}
+                                className={activeTab === "verify-hash" ? "active" : ""}
+                            >
+                                Verify Hash
+                            </Nav.Link>
+                            <Nav.Link
+                                href="#"
+                                onClick={() => setActiveTab("encoding")}
+                                className={activeTab === "encoding" ? "active" : ""}
+                            >
+                                Encodings
+                            </Nav.Link>
+                        </Nav>
+                    </Collapse>
+                </Container>
+            </Navbar>
 
-            <Tab eventKey="verify-hash" title="Verify Hash">
-                <VerifyHashComponent />
-            </Tab>
-
-            <Tab eventKey="encoding" title="Encodings">
-                <EncodingComponent />
-            </Tab>
-        </Tabs>
+            {/* Active Tab Content */}
+            <Container>
+                <div className="tab-content">{renderActiveTab()}</div>
+            </Container>
+        </div>
     );
 }
 
-export default Navbar;
+export default CipherToolsNavbar;

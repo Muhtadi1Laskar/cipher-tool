@@ -1,40 +1,44 @@
 /* General body styling */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
   min-height: 100vh;
   background: #00c6ff;
-  /* fallback for old browsers */
   background: -webkit-linear-gradient(to bottom, #0072ff, #00c6ff);
-  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to top, #0072ff, #00c6ff);
-  /* Modern browsers */
   color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Navbar styling */
-nav {
-  background: rgba(0, 0, 0, 0.3);
+#nav-bar {
+  background: #0072ff;
   padding: 1rem 2rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  color: #ffffff;
-  border-radius: 10px;
-  margin-bottom: 2rem;
+  margin: 2rem;
+  color: #0072ff;
+  border-radius: 7px;
 }
 
 .navbar-brand {
   font-weight: bold;
   font-size: 1.5rem;
-  color: #ffffff;
+  color: #ffffff !important;
   text-decoration: none;
 }
 
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
 .nav-link {
-  color: #ffffff;
+  color: #ffffff !important;
   font-size: 1rem;
   text-decoration: none;
   padding: 0.5rem 1rem;
@@ -47,51 +51,54 @@ nav {
   text-decoration: none;
 }
 
-/* Tabs styling for React Bootstrap */
-.nav-tabs {
-  border: none;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.nav-item .nav-link {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  padding: 0.75rem 1.5rem;
-  transition: all 0.2s ease;
-}
-
-.nav-item .nav-link.active {
-  background: #ffffff;
-  color: #0072ff;
+.nav-link.active {
   font-weight: bold;
+  color: #0072ff;
 }
 
-.nav-item .nav-link:hover {
-  background: rgba(255, 255, 255, 0.2);
+.navbar-toggler {
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
 }
 
-/* Tab content styling */
+
+.navbar-collapse {
+  flex-grow: 0;
+  justify-content: center;
+}
+
+
 .tab-content {
+  /* padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  min-height: 300px; */
+  max-width: 800px;
+  width: 90%;
+  margin: 2em auto;
   background: #ffffff;
   border-radius: 10px;
-  padding: 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
   color: #333;
 }
 
-/* Section headers */
+.tab-content h3 {
+  color: #0072ff;
+  margin-bottom: 1rem;
+}
+
+
 h2 {
   color: #0072ff;
   text-align: center;
   margin-bottom: 1.5em;
 }
 
-/* Forms */
 form {
   display: flex;
   flex-direction: column;
@@ -100,7 +107,7 @@ form {
 
 label {
   font-weight: 600;
-  color: #333;
+  color: #0072ff;
 }
 
 
@@ -139,15 +146,11 @@ button:hover {
   background: #005fcc;
 }
 
-/* Tab-specific results */
-.tab-pane {
+.tab-panel {
   margin-top: 1.5rem;
 }
 
-#result-section,
-#crypto-result,
-#verify-result,
-#encoding-result {
+#result-section {
   padding: 1rem;
   border: 1px solid #ccc;
   background: #f9fafb;
@@ -173,23 +176,37 @@ button:hover {
   border-color: #00c6ff;
 }
 
-/* Media queries for responsiveness */
-@media (max-width: 768px) {
-  .nav-tabs {
+
+@media (max-width: 1000px) {
+  #nav-bar {
+    width: auto;
+  }
+
+  .navbar-nav {
     flex-direction: column;
     gap: 0.5rem;
   }
 
-  .nav-item .nav-link {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-  }
-
   .tab-content {
-    padding: 1.5rem;
+    padding: 1rem;
+    width: 100%;
   }
 
   button {
     font-size: 0.9rem;
+    padding: 0.75em;
+  }
+
+  .navbar-collapse {
+    width: 100%;
+  }
+
+  #result-section {
+    padding: 0.5rem;
+  }
+
+  #result-component {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

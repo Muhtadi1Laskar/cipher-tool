@@ -29,7 +29,7 @@ export default function HashComponent() {
     };
 
     return (
-        <div className="p-3">
+        <div className="container my-5">
             <h2 className="text-primary">Hashing</h2>
             <form onSubmit={handleSubmit}>
                 <FormGroups

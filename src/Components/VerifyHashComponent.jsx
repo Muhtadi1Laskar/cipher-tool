@@ -30,7 +30,7 @@ function VerifyHashComponent() {
     }
 
     return (
-        <div className="p-3">
+        <div className="container my-5">
             <h2 className="text-primary">Verify Hash</h2>
             <form onSubmit={handleSubmit}>
                 <FormGroups
@@ -76,7 +76,6 @@ function VerifyHashComponent() {
 }
 
 const getVerifyMessage = (elem) => {
-    console.log(elem)
     return elem ? "The message is not altered" : "The message and the hash doesn't match";
 }
 

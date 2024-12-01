@@ -31,7 +31,7 @@ const cipherOptions = [
     { value: 'binaryEncoder', text: 'Binary' }
 ];
 
-const encoderList = [
+const encoderOptions = [
     { value: 'base32', text: 'Base 32' },
     { value: 'base64', text: 'Base 64' },
 ];
@@ -39,5 +39,5 @@ const encoderList = [
 export {
     hashOptions,
     cipherOptions,
-    encoderList
+    encoderOptions
 }
