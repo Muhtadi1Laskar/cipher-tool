@@ -1,53 +1,94 @@
+/* eslint-disable react/prop-types */
+import { useState } from "react";
+import { cipherOptions } from "../Utils/selectOptions";
+import { postCall } from "../API/postCall";
+import FormGroups from "./FormComponent";
+import DisplayComponent from "./DisplayComponent";
+
 function CipherComponent() {
+    const [formData, setFormData] = useState({
+        cipherType: "",
+        message: "",
+        key: "",
+        actionType: "",
+    });
+    const [cipherResponse, setCipherResponse] = useState("");
+    const [showKeyField, setShowKeyField] = useState(true);
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+
+        if (name === "cipherType") {
+            const noKeyRequired = ["atbashCipher", "baconCipher", "rot13Cipher", "binaryEncoder"];
+            setShowKeyField(!noKeyRequired.includes(value));
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { cipherType, message, key, actionType } = formData;
+
+        const response = await postCall(cipherType, { message, key, type: actionType });
+        setCipherResponse(response.data.message);
+    };
+
     return (
         <div className="p-3">
             <h2 className="text-primary">Encryption/Decryption</h2>
-            <form>
-                <div className="mb-3">
-                    <label htmlFor="crypto-message" className="form-label">
-                        Message:
-                    </label>
-                    <textarea
-                        id="crypto-message"
-                        className="form-control"
-                        placeholder="Enter the message"
-                        required
-                    ></textarea>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="crypto-key" className="form-label">
-                        Key:
-                    </label>
-                    <input
+            <form onSubmit={handleSubmit}>
+                <FormGroups
+                    label="Message:"
+                    id="crypto-message"
+                    type="textarea"
+                    placeholder="Enter the message"
+                    value={formData.message}
+                    name="message"
+                    onChange={handleInputChange}
+                    required
+                />
+                <FormGroups
+                    label="Ciphers:"
+                    id="crypto-algo"
+                    type="select"
+                    value={formData.cipherType}
+                    name="cipherType"
+                    onChange={handleInputChange}
+                    options={[
+                        { value: "", text: "Select a Cipher", disabled: true },
+                        ...cipherOptions,
+                    ]}
+                />
+                {showKeyField && (
+                    <FormGroups
+                        label="Key:"
                         id="crypto-key"
-                        className="form-control"
                         type="text"
                         placeholder="Enter the encryption key"
+                        value={formData.key}
+                        name="key"
+                        onChange={handleInputChange}
                         required
                     />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="crypto-algo" className="form-label">
-                        Algorithm:
-                    </label>
-                    <select id="crypto-algo" className="form-select">
-                        <option value="aes">AES</option>
-                        <option value="xor">XOR</option>
-                    </select>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="crypto-action" className="form-label">
-                        Action:
-                    </label>
-                    <select id="crypto-action" className="form-select">
-                        <option value="encrypt">Encrypt</option>
-                        <option value="decrypt">Decrypt</option>
-                    </select>
-                </div>
+                )}
+                <FormGroups
+                    label="Action:"
+                    id="crypto-action"
+                    type="select"
+                    value={formData.actionType}
+                    name="actionType"
+                    onChange={handleInputChange}
+                    options={[
+                        { value: "", text: "Select an Action", disabled: true },
+                        { value: "encrypt", text: "Encrypt" },
+                        { value: "decrypt", text: "Decrypt" },
+                    ]}
+                />
                 <button type="submit" className="btn btn-primary w-100">
                     Execute
                 </button>
             </form>
+            {cipherResponse && <DisplayComponent message={cipherResponse} />}
         </div>
     );
 }

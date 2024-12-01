@@ -21,10 +21,13 @@ const hashOptions = [
 
 
 const cipherOptions = [
-    { value: 'aes', text: 'AES' },
+    { value: 'aesCipher', text: 'AES' },
+    { value: 'atbashCipher', text: 'Atbash Cipher' },
+    { value: 'baconCipher', text: 'Bacon Cipher' },
+    { value: 'rot13Cipher', text: 'ROT13 Cipher' },
     { value: 'ceaserCipher', text: 'Caeser Cipher' },
     { value: 'vignereCipher', text: 'Vignere Cipher' },
-    { value: 'xor', text: 'xor' },
+    { value: 'xorCipher', text: 'xor' },
     { value: 'binaryEncoder', text: 'Binary' }
 ];
 
