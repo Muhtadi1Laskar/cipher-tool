@@ -70,7 +70,6 @@ function VerifyHashComponent() {
                     Verify
                 </button>
             </form>
-            {/* {!verifyResponse ? '' : <DisplayComponent message={`${verifyResponse}`} />} */}
             { verifyResponse && <DisplayComponent message={verifyResponse} /> }
         </div>
     );
