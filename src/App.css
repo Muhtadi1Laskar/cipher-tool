@@ -14,12 +14,20 @@ body {
 }
 
 #nav-bar {
-  background: #0072ff;
+  /* background: #0072ff;
   padding: 1rem 2rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   margin: 2rem;
   color: #0072ff;
   border-radius: 7px;
+  width: 10rem; */
+  background: rgba(0, 0, 0, 0.3);
+  /* Semi-transparent black for contrast */
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 2rem;
+  color: #0072ff;
+  border-radius: 10px;
 }
 
 .navbar-brand {
@@ -72,19 +80,11 @@ body {
 
 
 .tab-content {
-  /* padding: 2rem;
+  padding: 2rem;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  min-height: 300px; */
-  max-width: 800px;
-  width: 90%;
-  margin: 2em auto;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 2rem;
-  color: #333;
+  min-height: 300px;
 }
 
 .tab-content h3 {
@@ -96,7 +96,7 @@ body {
 h2 {
   color: #0072ff;
   text-align: center;
-  margin-bottom: 1.5em;
+  margin-bottom: 1.5rem;
 }
 
 form {
@@ -177,19 +177,18 @@ button:hover {
 }
 
 
-@media (max-width: 1000px) {
+@media (max-width: 700px) {
   #nav-bar {
     width: auto;
   }
 
   .navbar-nav {
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.5rem;
   }
 
   .tab-content {
     padding: 1rem;
-    width: 100%;
   }
 
   button {
@@ -197,16 +196,8 @@ button:hover {
     padding: 0.75em;
   }
 
-  .navbar-collapse {
-    width: 100%;
-  }
-
   #result-section {
-    padding: 0.5rem;
-  }
-
-  #result-component {
-    flex-direction: column;
-    align-items: flex-start;
+    /* padding: 0.5rem; */
+    width: 15rem;
   }
 }
