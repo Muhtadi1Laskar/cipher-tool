@@ -3,6 +3,7 @@ import { hashOptions } from "../Utils/selectOptions.js";
 import { postCall } from "../API/postCall.js";
 import FormGroups from "./FormComponent.jsx";
 import DisplayComponent from "./DisplayComponent.jsx";
+import SpinnerComponent from "./SpinnerComponent.jsx";
 
 
 export default function HashComponent() {
@@ -11,6 +12,7 @@ export default function HashComponent() {
         message: "",
         hash: ""
     });
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleInputChange = async (e) => {
         const { name, value } = e.target;
@@ -19,17 +21,28 @@ export default function HashComponent() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { message, hash } = formData;
-        const requestBody = {
-            message: message,
-            hash: hash
-        };
-        const response = await postCall('hashData', requestBody);
-        setHashResponse(response.data.hash);
+
+        setIsLoading(true);
+        setHashResponse("");
+        
+        try {
+            const { message, hash } = formData;
+            const requestBody = {
+                message: message,
+                hash: hash
+            };
+            const response = await postCall('hashData', requestBody);
+            setHashResponse(response.data.hash);
+        } catch(error) {
+            console.log("Error hashing data: ", error);
+            setHashResponse("Failed to hash the data");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
-        <div className="container my-5">
+        <div className="container-fluid my-5">
             <h2 className="text-primary">Hashing</h2>
             <form onSubmit={handleSubmit}>
                 <FormGroups
@@ -59,6 +72,7 @@ export default function HashComponent() {
                     Generate Hash
                 </button>
             </form>
+            {isLoading && <SpinnerComponent />}
             {!hashResponse ? "" : <DisplayComponent fileType={formData.hash} message={hashResponse} />}
         </div>
     );
