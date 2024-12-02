@@ -3,6 +3,7 @@ import { postCall } from "../API/postCall";
 import FormGroups from "./FormComponent";
 import { encoderOptions } from "../Utils/selectOptions";
 import DisplayComponent from "./DisplayComponent";
+import SpinnerComponent from "./SpinnerComponent";
 
 
 function EncodingComponent() {
@@ -12,6 +13,7 @@ function EncodingComponent() {
         type: ""
     });
     const [responseType, setResponseType] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleInputChange = async (e) => {
         const { name, value } = e.target;
@@ -21,10 +23,21 @@ function EncodingComponent() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { message, encoderType, type } = formData;
-        console.log(message, encoderType, type);
-        const response = await postCall("base64Encoder", { message, encoderType, type });
-        setResponseType(response.data.message);
+
+        setIsLoading(true);
+        setResponseType("");
+
+        try {
+            const { message, encoderType, type } = formData;
+            console.log(message, encoderType, type);
+            const response = await postCall("base64Encoder", { message, encoderType, type });
+            setResponseType(response.data.message);
+        } catch(error) {
+            console.log("An error fetching hash: ", error);
+            setResponseType("An error occured while processing the file");
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -74,6 +87,7 @@ function EncodingComponent() {
                     Process
                 </button>
             </form>
+            {isLoading && <SpinnerComponent />}
             { responseType && <DisplayComponent fileType={formData.encoderType} message={responseType} /> }
         </div>
     );

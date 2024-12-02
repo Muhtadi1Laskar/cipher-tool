@@ -3,6 +3,7 @@ import { cipherOptions } from "../Utils/selectOptions";
 import { postCall } from "../API/postCall";
 import FormGroups from "./FormComponent";
 import DisplayComponent from "./DisplayComponent";
+import SpinnerComponent from "./SpinnerComponent";
 
 function CipherComponent() {
     const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ function CipherComponent() {
     });
     const [cipherResponse, setCipherResponse] = useState("");
     const [showKeyField, setShowKeyField] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -26,10 +28,22 @@ function CipherComponent() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setIsLoading(true);
+        setCipherResponse("");
+
+        
         const { cipherType, message, key, actionType } = formData;
 
-        const response = await postCall(cipherType, { message, key, type: actionType });
-        setCipherResponse(response.data.message);
+        try { 
+            const response = await postCall(cipherType, { message, key, type: actionType });
+            setCipherResponse(response.data.message);
+        } catch (error) {
+            console.log("Failed to encrypt/decrypt data: ", error);
+            setCipherResponse("Failed to encrypt / decrypt data");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -87,6 +101,7 @@ function CipherComponent() {
                     Execute
                 </button>
             </form>
+            {isLoading && <SpinnerComponent />}
             {cipherResponse && <DisplayComponent fileType={formData.cipherType} message={cipherResponse} />}
         </div>
     );
