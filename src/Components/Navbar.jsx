@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Navbar, Nav, Container, Button, Collapse } from "react-bootstrap";
+import { Navbar, Nav, Container, Button, Collapse, NavDropdown } from "react-bootstrap";
 import HashComponent from "./HashComponent";
 import CipherComponent from "./CipherComponent";
 import VerifyHashComponent from "./VerifyHashComponent";
 import EncodingComponent from "./EncodingComponent";
+import HashFileUploadComponent from "./HashFileUpload";
 
 function CipherToolsNavbar() {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -15,6 +16,8 @@ function CipherToolsNavbar() {
         switch (activeTab) {
             case "hashing":
                 return <HashComponent />;
+            case "hashing-file":
+                return <HashFileUploadComponent />
             case "encryption":
                 return <CipherComponent />;
             case "verify-hash":
@@ -42,13 +45,26 @@ function CipherToolsNavbar() {
                     </Button>
                     <Collapse in={isExpanded} className="navbar-collapse">
                         <Nav className="me-auto" >
-                            <Nav.Link
-                                href="#"
-                                onClick={() => setActiveTab("hashing")}
-                                className={activeTab === "hashing" ? "active" : ""}
+
+                            <NavDropdown
+                                title="Hash"
+                                id="basic-nav-dropdown"
                             >
-                                Hashing
-                            </Nav.Link>
+                                <NavDropdown.Item
+                                    href="#"
+                                    onClick={() => setActiveTab("hashing")}
+                                    className={activeTab === "hashing" ? "active" : ""}
+                                >
+                                    Hash Text
+                                </NavDropdown.Item>
+                                <NavDropdown.Item
+                                    href="#"
+                                    onClick={() => setActiveTab("hashing-file")}
+                                    className={activeTab === "hashing-file" ? "active" : ""}
+                                >
+                                    Hash File
+                                </NavDropdown.Item>
+                            </NavDropdown>
                             <Nav.Link
                                 href="#"
                                 onClick={() => setActiveTab("encryption")}
