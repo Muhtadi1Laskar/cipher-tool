@@ -78,7 +78,7 @@ export default function HashFileUploadComponent() {
                 <button type="upload" className="btn btn-primary w-100">Upload</button>
             </form>
             {isLoading && <SpinnerComponent />}
-            {response && <DisplayComponent fileType={response} message={response} />}
+            {response && <DisplayComponent fileType={selectedAlgorithm} message={response} />}
         </div>
     );
 }

@@ -44,8 +44,7 @@ function CipherToolsNavbar() {
                         ☰
                     </Button>
                     <Collapse in={isExpanded} className="navbar-collapse">
-                        <Nav className="me-auto" >
-
+                        <Nav className="me-auto">
                             <NavDropdown
                                 title="Hash"
                                 id="basic-nav-dropdown"
