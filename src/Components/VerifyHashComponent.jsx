@@ -70,7 +70,7 @@ function VerifyHashComponent() {
                     Verify
                 </button>
             </form>
-            { verifyResponse && <DisplayComponent message={verifyResponse} /> }
+            { verifyResponse && <DisplayComponent fileType="verifyHash" message={verifyResponse} /> }
         </div>
     );
 }

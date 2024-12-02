@@ -87,7 +87,7 @@ function CipherComponent() {
                     Execute
                 </button>
             </form>
-            {cipherResponse && <DisplayComponent message={cipherResponse} />}
+            {cipherResponse && <DisplayComponent fileType={formData.cipherType} message={cipherResponse} />}
         </div>
     );
 }
