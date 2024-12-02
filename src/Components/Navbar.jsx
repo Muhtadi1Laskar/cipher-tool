@@ -30,7 +30,7 @@ function CipherToolsNavbar() {
     };
 
     return (
-        <div className="container-fluid">
+        <div className="container">
             {/* Navbar */}
             <Navbar bg="blue" variant="dark" expand="lg" className="navbar navbar-expand-lg navbar-dark bg-primary" id="nav-bar">
                 <Container>
@@ -44,7 +44,8 @@ function CipherToolsNavbar() {
                         ☰
                     </Button>
                     <Collapse in={isExpanded} className="navbar-collapse">
-                        <Nav className="me-auto">
+                        <Nav className="me-auto" >
+
                             <NavDropdown
                                 title="Hash"
                                 id="basic-nav-dropdown"
@@ -59,7 +60,7 @@ function CipherToolsNavbar() {
                                 <NavDropdown.Item
                                     href="#"
                                     onClick={() => setActiveTab("hashing-file")}
-                                    className={activeTab === "hashing-file" ? "active" : ""}
+                                    className={activeTab === "hashing-file" ? "active": ""}
                                 >
                                     Hash File
                                 </NavDropdown.Item>
