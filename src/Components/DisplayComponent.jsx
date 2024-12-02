@@ -2,7 +2,7 @@ import { useState } from "react";
 import DownlaodButton from "./DownloadComponent";
 
 // eslint-disable-next-line react/prop-types
-export default function DisplayComponent({ message }) {
+export default function DisplayComponent({ fileType, message }) {
     const [copyStatus, setCopyStatus] = useState("");
 
     const handleCopy = () => {
@@ -24,18 +24,23 @@ export default function DisplayComponent({ message }) {
             <div id="result-section" className="mt-3 text-success">
                 <div id="result-component" className="d-flex align-items-center">
                     <span id="result-span" className="me-2">{message}</span>
-                    <button
-                        onClick={handleCopy}
-                        id="cliboardButton"
-                        className="btn btn-outline-secondary btn-sm"
-                        title="Copy to Clipboard"
-                    >
-                        📋
-                    </button>
                 </div>
                 {copyStatus && <small className="text-muted mt-1">{copyStatus}</small>}
             </div>
-            <DownlaodButton content={message} />
+            <div id="result-button">
+                <DownlaodButton fileName={fileType} content={message} />
+                <button
+                    onClick={handleCopy}
+                    id="cliboardButton"
+                    className="btn btn-primary"
+                    title="Copy to Clipboard"
+                    style={{
+                        width: "9rem"
+                    }}
+                >
+                    Copy 📋
+                </button>
+            </div>
         </div>
     );
 }

@@ -4,7 +4,6 @@ import HashComponent from "./HashComponent";
 import CipherComponent from "./CipherComponent";
 import VerifyHashComponent from "./VerifyHashComponent";
 import EncodingComponent from "./EncodingComponent";
-import "../App.css";
 
 function CipherToolsNavbar() {
     const [isExpanded, setIsExpanded] = useState(false);

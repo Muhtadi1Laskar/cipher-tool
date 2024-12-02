@@ -59,7 +59,7 @@ export default function HashComponent() {
                     Generate Hash
                 </button>
             </form>
-            {!hashResponse ? "" : <DisplayComponent message={hashResponse} />}
+            {!hashResponse ? "" : <DisplayComponent fileType={formData.hash} message={hashResponse} />}
         </div>
     );
 }

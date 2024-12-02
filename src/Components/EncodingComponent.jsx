@@ -74,7 +74,7 @@ function EncodingComponent() {
                     Process
                 </button>
             </form>
-            { responseType && <DisplayComponent message={responseType} /> }
+            { responseType && <DisplayComponent fileType={formData.encoderType} message={responseType} /> }
         </div>
     );
 }

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-export default function DownlaodButton({ content }) {
+export default function DownlaodButton({ fileName, content }) {
     function downloadFile(filename, content) {
         const blob = new Blob([content], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
@@ -13,7 +13,7 @@ export default function DownlaodButton({ content }) {
       
       return (
         <button
-        onClick={() => downloadFile('result.txt', content)}
+        onClick={() => downloadFile(`${fileName}.txt`, content)}
         className="btn btn-primary"
         style={{
           width: "9rem"
