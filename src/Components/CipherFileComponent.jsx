@@ -95,7 +95,7 @@ export default function CipherFileComponent() {
                 <div className="file-upload">
                     <label htmlFor="file" className="file-label">
                         <i className="upload-icon"></i>
-                        <span>Choose File</span>
+                        <span>Choose Text File</span>
                     </label>
                     <input id="file" type="file" onChange={handleFileChange} />
                     <span id="file-name-display">No file chosen</span>
