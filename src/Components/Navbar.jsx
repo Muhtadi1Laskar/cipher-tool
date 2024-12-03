@@ -5,6 +5,7 @@ import CipherComponent from "./CipherComponent";
 import VerifyHashComponent from "./VerifyHashComponent";
 import EncodingComponent from "./EncodingComponent";
 import HashFileUploadComponent from "./HashFileUpload";
+import CipherFileComponent from "./CipherFileComponent";
 
 function CipherToolsNavbar() {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -18,6 +19,8 @@ function CipherToolsNavbar() {
                 return <HashComponent />;
             case "hashing-file":
                 return <HashFileUploadComponent />
+            case "cipher-file":
+                return <CipherFileComponent />
             case "encryption":
                 return <CipherComponent />;
             case "verify-hash":
@@ -31,7 +34,6 @@ function CipherToolsNavbar() {
 
     return (
         <div className="container">
-            {/* Navbar */}
             <Navbar bg="blue" variant="dark" expand="lg" className="navbar navbar-expand-lg navbar-dark bg-primary" id="nav-bar">
                 <Container>
                     <Navbar.Brand href="#">Cipher Tools</Navbar.Brand>
@@ -45,17 +47,30 @@ function CipherToolsNavbar() {
                     </Button>
                     <Collapse in={isExpanded} className="navbar-collapse">
                         <Nav className="me-auto" >
-
+                            <Nav.Link
+                                href="#"
+                                onClick={() => setActiveTab("hashing")}
+                                className={activeTab === "hashing" ? "active" : ""}
+                            >
+                                Hash
+                            </Nav.Link>
+                            <Nav.Link
+                                href="#"
+                                onClick={() => setActiveTab("encryption")}
+                                className={activeTab === "encryption" ? "active" : ""}
+                            >
+                                Cipher
+                            </Nav.Link>
                             <NavDropdown
-                                title="Hash"
+                                title="Upload File"
                                 id="basic-nav-dropdown"
                             >
                                 <NavDropdown.Item
                                     href="#"
-                                    onClick={() => setActiveTab("hashing")}
-                                    className={activeTab === "hashing" ? "active" : ""}
+                                    onClick={() => setActiveTab("cipher-file")}
+                                    className={activeTab === "cipher-file" ? "active": ""}
                                 >
-                                    Hash Text
+                                    Cipher File
                                 </NavDropdown.Item>
                                 <NavDropdown.Item
                                     href="#"
@@ -65,20 +80,6 @@ function CipherToolsNavbar() {
                                     Hash File
                                 </NavDropdown.Item>
                             </NavDropdown>
-                            <Nav.Link
-                                href="#"
-                                onClick={() => setActiveTab("encryption")}
-                                className={activeTab === "encryption" ? "active" : ""}
-                            >
-                                Cipher
-                            </Nav.Link>
-                            <Nav.Link
-                                href="#"
-                                onClick={() => setActiveTab("verify-hash")}
-                                className={activeTab === "verify-hash" ? "active" : ""}
-                            >
-                                Verify Hash
-                            </Nav.Link>
                             <Nav.Link
                                 href="#"
                                 onClick={() => setActiveTab("encoding")}

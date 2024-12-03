@@ -27,6 +27,11 @@ export default function HashFileUploadComponent() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if(!file || !selectedAlgorithm) {
+            alert("Please select an algorithm and select a file");
+            return
+        }
+
         setIsLoading(true);
         setResponse("");
 
