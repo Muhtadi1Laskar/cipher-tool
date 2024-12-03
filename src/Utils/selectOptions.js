@@ -28,7 +28,8 @@ const cipherOptions = [
     { value: 'ceaserCipher', text: 'Caeser Cipher' },
     { value: 'vignereCipher', text: 'Vignere Cipher' },
     { value: 'xorCipher', text: 'xor' },
-    { value: 'binaryEncoder', text: 'Binary' }
+    { value: 'binaryEncoder', text: 'Binary' },
+    { value: 'morseCode', text: 'Morse Code' },
 ];
 
 const encoderOptions = [
