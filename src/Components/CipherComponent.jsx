@@ -4,6 +4,7 @@ import { postCall } from "../API/postCall";
 import FormGroups from "./FormComponent";
 import DisplayComponent from "./DisplayComponent";
 import SpinnerComponent from "./SpinnerComponent";
+import { convertToMorse, convertToChar } from "../Tools/morseCode.js";
 
 function CipherComponent() {
     const [formData, setFormData] = useState({
@@ -16,19 +17,38 @@ function CipherComponent() {
     const [showKeyField, setShowKeyField] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
 
+    const checkOnHouseCipher = (cipherName) => {
+        const cipherList = ['morseCode'];
+        return cipherList.includes(cipherName);
+    }
+
+    const handleOnHouseCipher = (cipherName, type, message) => {
+        switch (type) {
+            case "encrypt":
+                return convertToMorse(message)
+            case "decrypt":
+                return convertToChar(message)
+            default:
+                throw new Error("Invalid action type")
+        }
+    }
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+
+        setFormData((prev) => ({ 
+            ...prev, 
+            [name]: value 
+        }));
 
         if (name === "cipherType") {
-            const noKeyRequired = ["atbashCipher", "baconCipher", "rot13Cipher", "binaryEncoder"];
+            const noKeyRequired = ["atbashCipher", "baconCipher", "rot13Cipher", "binaryEncoder", "morseCode"];
             setShowKeyField(!noKeyRequired.includes(value));
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         setIsLoading(true);
         setCipherResponse("");
 
@@ -36,8 +56,13 @@ function CipherComponent() {
         const { cipherType, message, key, actionType } = formData;
 
         try { 
-            const response = await postCall(cipherType, { message, key, type: actionType });
-            setCipherResponse(response.data.message);
+            if(checkOnHouseCipher(cipherType)) {
+                let cipher = handleOnHouseCipher(cipherType, actionType, message);
+                setCipherResponse(cipher);
+            } else {
+                const response = await postCall(cipherType, { message, key, type: actionType });
+                setCipherResponse(response.data.message);
+            }
         } catch (error) {
             console.log("Failed to encrypt/decrypt data: ", error);
             setCipherResponse("Failed to encrypt / decrypt data");
