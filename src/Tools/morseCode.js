@@ -27,7 +27,7 @@ const convertToChar = (code) => {
     const result = [];
 
     for(const char of code.trim().split(' ')) {
-        result.push(morseToChar[char].toLowerCase() || '[?]');
+        result.push(morseToChar[char]|| '[?]');
     }
     return result.join('');
 }
