@@ -18,18 +18,18 @@ function CipherComponent() {
     const [isLoading, setIsLoading] = useState(false);
 
     const checkOnHouseCipher = (cipherName) => {
-        const cipherList = ['morse', 'vernam'];
+        const cipherList = ['morse', 'vernam', 'dna'];
         return cipherList.includes(cipherName);
     }
 
-    const handleOnHouseCipher = (cipherName, type, message, key='') => {
+    const handleOnHouseCipher = (cipherName, type, message, key = '') => {
         const cipher = cipherRegistry[cipherName];
-        if(!cipher) {
+        if (!cipher) {
             throw new Error(`Unsupported cipher: ${cipherName}`);
         }
 
         const action = cipher[type];
-        if(!action) {
+        if (!action) {
             throw new Error(`Unsupported action: ${action}`);
         }
 
@@ -39,13 +39,20 @@ function CipherComponent() {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
 
-        setFormData((prev) => ({ 
-            ...prev, 
-            [name]: value 
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value
         }));
 
         if (name === "cipherType") {
-            const noKeyRequired = ["atbashCipher", "baconCipher", "rot13Cipher", "binaryEncoder", "morse"];
+            const noKeyRequired = [
+                'atbashCipher',
+                'baconCipher',
+                'rot13Cipher',
+                'binaryEncoder',
+                'morse',
+                'dna'
+            ];
             setShowKeyField(!noKeyRequired.includes(value));
         }
     };
@@ -55,11 +62,11 @@ function CipherComponent() {
         setIsLoading(true);
         setCipherResponse("");
 
-        
+
         const { cipherType, message, key, actionType } = formData;
 
-        try { 
-            if(checkOnHouseCipher(cipherType)) {
+        try {
+            if (checkOnHouseCipher(cipherType)) {
                 let cipher = handleOnHouseCipher(cipherType, actionType, message, key);
                 setCipherResponse(cipher);
             } else {
