@@ -4,7 +4,7 @@ import { postCall } from "../API/postCall";
 import FormGroups from "./FormComponent";
 import DisplayComponent from "./DisplayComponent";
 import SpinnerComponent from "./SpinnerComponent";
-import { convertToMorse, convertToChar } from "../Tools/morseCode.js";
+import cipherRegistry from "../Tools/commonTools.js";
 
 function CipherComponent() {
     const [formData, setFormData] = useState({
@@ -18,19 +18,22 @@ function CipherComponent() {
     const [isLoading, setIsLoading] = useState(false);
 
     const checkOnHouseCipher = (cipherName) => {
-        const cipherList = ['morseCode'];
+        const cipherList = ['morse', 'vernam'];
         return cipherList.includes(cipherName);
     }
 
-    const handleOnHouseCipher = (cipherName, type, message) => {
-        switch (type) {
-            case "encrypt":
-                return convertToMorse(message)
-            case "decrypt":
-                return convertToChar(message)
-            default:
-                throw new Error("Invalid action type")
+    const handleOnHouseCipher = (cipherName, type, message, key='') => {
+        const cipher = cipherRegistry[cipherName];
+        if(!cipher) {
+            throw new Error(`Unsupported cipher: ${cipherName}`);
         }
+
+        const action = cipher[type];
+        if(!action) {
+            throw new Error(`Unsupported action: ${action}`);
+        }
+
+        return action(message, key);
     }
 
     const handleInputChange = (e) => {
@@ -42,7 +45,7 @@ function CipherComponent() {
         }));
 
         if (name === "cipherType") {
-            const noKeyRequired = ["atbashCipher", "baconCipher", "rot13Cipher", "binaryEncoder", "morseCode"];
+            const noKeyRequired = ["atbashCipher", "baconCipher", "rot13Cipher", "binaryEncoder", "morse"];
             setShowKeyField(!noKeyRequired.includes(value));
         }
     };
@@ -57,7 +60,7 @@ function CipherComponent() {
 
         try { 
             if(checkOnHouseCipher(cipherType)) {
-                let cipher = handleOnHouseCipher(cipherType, actionType, message);
+                let cipher = handleOnHouseCipher(cipherType, actionType, message, key);
                 setCipherResponse(cipher);
             } else {
                 const response = await postCall(cipherType, { message, key, type: actionType });

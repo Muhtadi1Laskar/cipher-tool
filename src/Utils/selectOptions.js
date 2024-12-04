@@ -29,7 +29,8 @@ const cipherOptions = [
     { value: 'vignereCipher', text: 'Vignere Cipher' },
     { value: 'xorCipher', text: 'xor' },
     { value: 'binaryEncoder', text: 'Binary' },
-    { value: 'morseCode', text: 'Morse Code' },
+    { value: 'morse', text: 'Morse Code' },
+    { value: 'vernam', text: 'Vernam Code' },
 ];
 
 const encoderOptions = [
