@@ -31,6 +31,7 @@ const cipherOptions = [
     { value: 'binaryEncoder', text: 'Binary' },
     { value: 'morse', text: 'Morse Code' },
     { value: 'vernam', text: 'Vernam Code' },
+    { value: 'dna', text: 'DNA Cipher' },
 ];
 
 const encoderOptions = [
