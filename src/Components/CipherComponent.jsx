@@ -18,7 +18,7 @@ function CipherComponent() {
     const [isLoading, setIsLoading] = useState(false);
 
     const checkOnHouseCipher = (cipherName) => {
-        const cipherList = ['morse', 'vernam', 'dna'];
+        const cipherList = ['morse', 'vernam', 'dna', 'polybius'];
         return cipherList.includes(cipherName);
     }
 
@@ -51,7 +51,8 @@ function CipherComponent() {
                 'rot13Cipher',
                 'binaryEncoder',
                 'morse',
-                'dna'
+                'dna',
+                'polybius'
             ];
             setShowKeyField(!noKeyRequired.includes(value));
         }
