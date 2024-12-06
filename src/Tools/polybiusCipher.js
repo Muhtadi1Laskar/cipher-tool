@@ -1,35 +1,39 @@
-const grid = [
-    ['A', 'B', 'C', 'D', 'E'],
-    ['F', 'G', 'H', 'I', 'K'], // J is often combined with I
-    ['L', 'M', 'N', 'O', 'P'],
-    ['Q', 'R', 'S', 'T', 'U'],
-    ['V', 'W', 'X', 'Y', 'Z']
-];
+const alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
 
-const charToCoordinates = {};
-const coordinatesToChar = {};
+const charToIndex = (char) => {
+  const upperChar = char.toUpperCase();
+  if (upperChar === 'J') return alphabet.indexOf('I');
+  return alphabet.indexOf(upperChar);
+};
 
-for(let row = 0; row < 5; row++) {
-    for(let col = 0; col < 5; col++) {
-        const char = grid[row][col];
-        charToCoordinates[char] = `${row+1}${col+1}`;
-        coordinatesToChar[`${row+1}${col+1}`] = char;
-    }
-}
+const indexToChar = (index) => alphabet[index];
 
+// Encrypt the message
 const polybiusEncrypt = (message) => {
-    const upperMessage = message.toUpperCase().replace(/J/g, 'I');
-    return [...upperMessage]
-            .map(char => charToCoordinates[char] || char)
-            .join(' ');
-}
+  return [...message.toUpperCase()]
+    .map(char => {
+      const index = charToIndex(char);
+      if (index === -1) return char;
+      const row = Math.floor(index / 5) + 1;
+      const col = (index % 5) + 1;
+      return `${row}${col}`;
+    })
+    .join(' ');
+};
 
-const polybiusDecrypt = (message) => {
-    return message
-            .split(' ')
-            .map(pair => coordinatesToChar[pair] || pair)
-            .join('');
-}
+// Decrypt the ciphertext
+const polybiusDecrypt = (cipherText) => {
+  return cipherText
+    .split(' ')
+    .map(pair => {
+      if (pair.length !== 2) return pair;
+      const row = parseInt(pair[0], 10);
+      const col = parseInt(pair[1], 10);
+      const index = (row - 1) * 5 + (col - 1);
+      return indexToChar(index);
+    })
+    .join('');
+};
 
 export {
     polybiusEncrypt,
