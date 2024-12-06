@@ -8,7 +8,6 @@ const charToIndex = (char) => {
 
 const indexToChar = (index) => alphabet[index];
 
-// Encrypt the message
 const polybiusEncrypt = (message) => {
   return [...message.toUpperCase()]
     .map(char => {
@@ -21,7 +20,6 @@ const polybiusEncrypt = (message) => {
     .join(' ');
 };
 
-// Decrypt the ciphertext
 const polybiusDecrypt = (cipherText) => {
   return cipherText
     .split(' ')
