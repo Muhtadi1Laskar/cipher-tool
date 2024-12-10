@@ -4,11 +4,14 @@ const toDecimal = (n) => parseInt(n, 2);
 
 const toOctal = (n) => {
     n = +n;
-    return n.toString(8);
+    return parseInt(n, 10).toString(8);
 }
+
+const toHexadecimal = (n) => parseInt(n, 10).toString(16);
 
 export {
     toBinary,
     toDecimal,
-    toOctal
+    toOctal,
+    toHexadecimal
 };
