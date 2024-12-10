@@ -38,6 +38,10 @@ const cipherOptions = [
 const encoderOptions = [
     { value: 'base32', text: 'Base 32' },
     { value: 'base64', text: 'Base 64' },
+    { value: 'decimal', text: 'Decimal' },
+    { value: 'binary', text: 'Binary' },
+    { value: 'octal', text: 'Octal' },
+    { value: 'dexadecimal', text: 'Hexadecimal' },
 ];
 
 export {
