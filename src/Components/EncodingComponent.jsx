@@ -41,6 +41,8 @@ function EncodingComponent() {
             throw new Error(`Unsupported encoder: ${encoder}`);
         }
 
+        console.log(encoder, typeof message);
+
         return encoder(message);
     }
 
