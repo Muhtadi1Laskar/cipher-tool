@@ -36,12 +36,11 @@ function EncodingComponent() {
             alert("Pleaser enter a number");
             return "";
         }
+
         const encoder = cipherRegistry[encoderType];
         if (!encoder) {
             throw new Error(`Unsupported encoder: ${encoder}`);
         }
-
-        console.log(encoder, typeof message);
 
         return encoder(message);
     }

@@ -2,7 +2,7 @@ import { convertToChar, convertToMorse } from "./morseCode";
 import { VernumCipher } from "./vernumCipher";
 import { encryptToDNA, decryptToText } from "./DNACode";
 import { polybiusDecrypt, polybiusEncrypt } from "./polybiusCipher";
-import { toBinary, toDecimal, toOctal } from "./numberConverter";
+import { toBinary, toDecimal, toHexadecimal, toOctal } from "./numberConverter";
 
 const morseCode = {
     encrypt: (message) => convertToMorse(message),
@@ -31,7 +31,8 @@ const cipherRegistry = {
     polybius: polybiusCipher,
     binary: toBinary,
     decimal: toDecimal,
-    octal: toOctal
+    octal: toOctal,
+    hexadecimal: toHexadecimal
 };
 
 export default cipherRegistry;
