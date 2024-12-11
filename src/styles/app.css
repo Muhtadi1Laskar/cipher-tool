@@ -85,6 +85,19 @@ body {
   margin-bottom: 1rem;
 }
 
+.image-div {
+  display: flex;
+  justify-content: center;
+}
+
+#identicon {
+  margin-top: 30px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  height: auto;
+  width: 17rem;
+}
+
 
 h2 {
   color: #0072ff;
