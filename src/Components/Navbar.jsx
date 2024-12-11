@@ -6,6 +6,7 @@ import VerifyHashComponent from "./VerifyHashComponent";
 import EncodingComponent from "./EncodingComponent";
 import HashFileUploadComponent from "./HashFileUpload";
 import CipherFileComponent from "./CipherFileComponent";
+import IdenticonComponent from "./IdenticonComponent";
 
 function CipherToolsNavbar() {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -27,6 +28,8 @@ function CipherToolsNavbar() {
                 return <VerifyHashComponent />;
             case "encoding":
                 return <EncodingComponent />;
+            case "identicon":
+                return <IdenticonComponent />;
             default:
                 return null;
         }
@@ -86,6 +89,13 @@ function CipherToolsNavbar() {
                                 className={activeTab === "encoding" ? "active" : ""}
                             >
                                 Encodings
+                            </Nav.Link>
+                            <Nav.Link
+                                href="#"
+                                onClick={() => setActiveTab("identicon")}
+                                className={activeTab === "identicon" ? "active" : ""}
+                            >
+                                Identicon
                             </Nav.Link>
                         </Nav>
                     </Collapse>
