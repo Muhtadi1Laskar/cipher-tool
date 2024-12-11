@@ -36,8 +36,6 @@ const cipherOptions = [
 ];
 
 const encoderOptions = [
-    { value: 'base32', text: 'Base 32' },
-    { value: 'base64', text: 'Base 64' },
     { value: 'decimal', text: 'Binary to Decimal' },
     { value: 'binary', text: 'Decimal to Binary' },
     { value: 'octal', text: 'Decimal to Octal' },
