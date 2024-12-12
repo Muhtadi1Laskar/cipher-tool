@@ -6,7 +6,7 @@ export default function FormGroups({ label, id, type, value, name, onChange, pla
                 {label}
             </label>
             {type === "select" ? (
-                <select id={id} className="form-select" name={name} value={value} onChange={onChange}>
+                <select id={id} className="form-select" name={name} value={value} onChange={onChange} required>
                     {options.map((opt, idx) => (
                         <option key={idx} value={opt.value} disabled={opt.disabled || false}>
                             {opt.text}
