@@ -64,7 +64,7 @@ export default function HashComponent() {
                     name="hash"
                     onChange={handleInputChange}
                     options={[
-                        { value: "", text: "Select a Cipher", disabled: true },
+                        { value: "", text: "Select an Algorithm", disabled: true },
                         ...hashOptions
                     ]}
                 />
